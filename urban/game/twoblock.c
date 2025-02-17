@@ -37,8 +37,7 @@
 
 #include <stdio.h>
 
-void twoblock_init(n_byte2 * seed, n_vect2 * location, simulated_twoblock * twoblock)
-{
+void twoblock_init(n_byte2 * seed, n_vect2 * location, simulated_twoblock * twoblock) {
     twoblock->rotation = math_random(seed) & 1;
     house_init(seed, location, (simulated_building*)&(twoblock->house));
     
