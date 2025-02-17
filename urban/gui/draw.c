@@ -34,7 +34,6 @@
  ****************************************************************/
 
 #include "../../apesdk/render/glrender.h"
-#include "../../apesdk/entity/entity.h"
 #include "../game/mushroom.h"
 #include "../game/city.h"
 
@@ -358,48 +357,48 @@ void draw_neighborhood(void)
 
 void draw_city(void)
 {
-    simulated_being *beings = city_beings();
-    n_uint beings_number = city_beings_number();
-    n_uint loop = 0;
+//    simulated_being *beings = city_beings();
+//    n_uint beings_number = city_beings_number();
+//    n_uint loop = 0;
     /*n_int  line_count = 0;
     matrix_plane * span_values;*/
     
     glrender_color(ENTITY_COLOR);
     
     glrender_wide_line();
-    while (loop < beings_number)
-    {
-        n_vect2 line_start;
-        n_vect2 line_end;
-        n_vect2 facing;
-        
-        line_start.x = line_end.x = being_location_x(&beings[loop]);
-        line_start.y = line_end.y = being_location_y(&beings[loop]);
-        
-        being_facing_vector(&beings[loop], &facing, 50);
-        
-        city_translate(&line_start);
-        city_translate(&line_end);
-        
-        vect2_add(&facing, &line_start, &facing);
-        
-        glrender_line(&line_start, &facing);
-        
-        line_start.x -= 5;
-        line_end.x += 5;
-        
-        glrender_line(&line_start, &line_end);
-        
-        line_start.x += 5;
-        line_end.x -= 5;
-        
-        line_start.y -= 5;
-        line_end.y += 5;
-        
-        glrender_line(&line_start, &line_end);
-        
-        loop++;
-    }
+//    while (loop < beings_number)
+//    {
+//        n_vect2 line_start;
+//        n_vect2 line_end;
+//        n_vect2 facing;
+//        
+////        line_start.x = line_end.x = being_location_x(&beings[loop]);
+////        line_start.y = line_end.y = being_location_y(&beings[loop]);
+////        
+////        being_facing_vector(&beings[loop], &facing, 50);
+////        
+//        city_translate(&line_start);
+//        city_translate(&line_end);
+//        
+//        vect2_add(&facing, &line_start, &facing);
+//        
+//        glrender_line(&line_start, &facing);
+//        
+//        line_start.x -= 5;
+//        line_end.x += 5;
+//        
+//        glrender_line(&line_start, &line_end);
+//        
+//        line_start.x += 5;
+//        line_end.x -= 5;
+//        
+//        line_start.y -= 5;
+//        line_end.y += 5;
+//        
+//        glrender_line(&line_start, &line_end);
+//        
+//        loop++;
+//    }
 
 }
 
@@ -416,7 +415,6 @@ n_int draw_game_scene(n_int dim_x, n_int dim_y)
     {
         glrender_start_display_list();
         draw_neighborhood();
-        /*game_grid();*/
         glrender_end_display_list();
     }
     else

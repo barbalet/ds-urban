@@ -35,23 +35,20 @@
 
 #include "city.h"
 
-// Global variables
-static simulated_being beings[MAX_NUMBER_APES];  // Array of simulated beings
-static n_uint beings_number;                     // Number of beings in the simulation
 
 // City dimensions
 #define DIMENSION_X (CITY_TOP_RIGHT_X - CITY_BOTTOM_LEFT_X)
 #define DIMENSION_Y (CITY_TOP_RIGHT_Y - CITY_BOTTOM_LEFT_Y)
 
 // Function to get the array of beings
-simulated_being *city_beings(void) {
-    return beings;
-}
-
-// Function to get the number of beings
-n_uint city_beings_number(void) {
-    return beings_number;
-}
+//simulated_being *city_beings(void) {
+//    return beings;
+//}
+//
+//// Function to get the number of beings
+//n_uint city_beings_number(void) {
+//    return beings_number;
+//}
 
 // Function to check if a being can move to a new location
 n_byte city_being_can_move(n_vect2 *location, n_vect2 *delta) {
@@ -82,228 +79,228 @@ void city_translate(n_vect2 *pnt) {
 }
 
 // Function to check line of sight between a being and a location
-n_byte city_line_of_sight(simulated_being *being, n_vect2 *location) {
-    n_vect2 start, end;
-    start.x = being_location_x(being);
-    start.y = being_location_y(being);
-    end.x = location->x;
-    end.y = location->y;
-
-    city_translate(&start);
-    city_translate(&end);
-
-    return matrix_visually_open(&start, &end);
-}
+//n_byte city_line_of_sight(simulated_being *being, n_vect2 *location) {
+//    n_vect2 start, end;
+//    start.x = being_location_x(being);
+//    start.y = being_location_y(being);
+//    end.x = location->x;
+//    end.y = location->y;
+//
+//    city_translate(&start);
+//    city_translate(&end);
+//
+//    return matrix_visually_open(&start, &end);
+//}
 
 // Function to initialize the city and beings
 void city_init(n_byte2 *seed) {
-    beings_number = being_init_group(beings, seed, (MAX_NUMBER_APES * 5) / 7, MAX_NUMBER_APES);
-    being_wrap_override(&city_being_wrap);
-    being_can_move_override(&city_being_can_move);
-    being_initial_location_override(&city_being_initial_location);
-    being_line_of_sight_override(&city_line_of_sight);
+//    beings_number = being_init_group(beings, seed, (MAX_NUMBER_APES * 5) / 7, MAX_NUMBER_APES);
+//    being_wrap_override(&city_being_wrap);
+//    being_can_move_override(&city_being_can_move);
+//    being_initial_location_override(&city_being_initial_location);
+//    being_line_of_sight_override(&city_line_of_sight);
 }
 
 // Function to handle listening behavior for beings
-void city_listen(simulated_being *beings, n_uint beings_number, simulated_being *local_being) {
-    being_listen_struct bls;
-    n_uint loop = 0;
-
-    if (local_being->delta.awake == 0) return;
-
-    bls.max_shout_volume = 127;
-    bls.local = local_being;
-
-    // Clear shout values
-    if (local_being->changes.shout[SHOUT_CTR] > 0) {
-        local_being->changes.shout[SHOUT_CTR]--;
-    }
-
-    while (loop < beings_number) {
-        simulated_being *other = &beings[loop];
-        if (other != local_being) {
-            being_listen_loop_no_sim(other, (void *)&bls);
-        }
-        loop++;
-    }
-}
+//void city_listen(simulated_being *beings, n_uint beings_number, simulated_being *local_being) {
+//    being_listen_struct bls;
+//    n_uint loop = 0;
+//
+//    if (local_being->delta.awake == 0) return;
+//
+//    bls.max_shout_volume = 127;
+//    bls.local = local_being;
+//
+//    // Clear shout values
+//    if (local_being->changes.shout[SHOUT_CTR] > 0) {
+//        local_being->changes.shout[SHOUT_CTR]--;
+//    }
+//
+//    while (loop < beings_number) {
+//        simulated_being *other = &beings[loop];
+//        if (other != local_being) {
+//            being_listen_loop_no_sim(other, (void *)&bls);
+//        }
+//        loop++;
+//    }
+//}
 
 // Function to handle sociability behavior for beings
-void city_sociability(simulated_being *beings, n_uint beings_number, simulated_being *local_being) {
-    drives_sociability_data dsd;
-    n_uint loop = 0;
-
-    dsd.beings_in_vacinity = 0;
-    dsd.being = local_being;
-
-    while (loop < beings_number) {
-        simulated_being *other = &beings[loop];
-        if (other != local_being) {
-            drives_sociability_loop_no_sim(other, (void *)&dsd);
-        }
-        loop++;
-    }
-    being_crowding_cycle(local_being, dsd.beings_in_vacinity);
-}
-
-// Function to calculate a being's speed based on its state
-static void city_calculate_speed(simulated_being *local, n_int tmp_speed, n_byte loc_state) {
-    n_int loc_s = being_speed(local);
-
-    if (tmp_speed > 10) tmp_speed = 10;
-    if (tmp_speed < 0) tmp_speed = 0;
-
-    if ((local->delta.awake != FULLY_AWAKE) || (loc_state & BEING_STATE_HUNGRY)) {
-        if ((loc_state & BEING_STATE_SWIMMING) != 0) {
-            tmp_speed = (being_energy(local) >> 7);
-        } else {
-            tmp_speed = 0;
-        }
-    }
-
-    if (tmp_speed > loc_s) loc_s++;
-    if (tmp_speed < loc_s) loc_s--;
-    if (tmp_speed < loc_s) loc_s--;
-
-    being_set_speed(local, (n_byte)loc_s);
-}
+//void city_sociability(simulated_being *beings, n_uint beings_number, simulated_being *local_being) {
+////    drives_sociability_data dsd;
+////    n_uint loop = 0;
+////
+////    dsd.beings_in_vacinity = 0;
+////    dsd.being = local_being;
+////
+////    while (loop < beings_number) {
+////        simulated_being *other = &beings[loop];
+////        if (other != local_being) {
+////            drives_sociability_loop_no_sim(other, (void *)&dsd);
+////        }
+////        loop++;
+////    }
+////    being_crowding_cycle(local_being, dsd.beings_in_vacinity);
+//}
+//
+//// Function to calculate a being's speed based on its state
+//static void city_calculate_speed(simulated_being *local, n_int tmp_speed, n_byte loc_state) {
+//    n_int loc_s = being_speed(local);
+//
+//    if (tmp_speed > 10) tmp_speed = 10;
+//    if (tmp_speed < 0) tmp_speed = 0;
+//
+//    if ((local->delta.awake != FULLY_AWAKE) || (loc_state & BEING_STATE_HUNGRY)) {
+//        if ((loc_state & BEING_STATE_SWIMMING) != 0) {
+//            tmp_speed = (being_energy(local) >> 7);
+//        } else {
+//            tmp_speed = 0;
+//        }
+//    }
+//
+//    if (tmp_speed > loc_s) loc_s++;
+//    if (tmp_speed < loc_s) loc_s--;
+//    if (tmp_speed < loc_s) loc_s--;
+//
+//    being_set_speed(local, (n_byte)loc_s);
+//}
 
 // Function to handle the awake cycle for a being
-void city_cycle_awake(simulated_being *local) {
-    n_int loc_s = being_speed(local);
-    n_int loc_h = being_height(local);
-    n_int tmp_speed = being_random(local) & 3;
-    n_byte loc_state = BEING_STATE_ASLEEP;
-    n_vect2 being_location;
+//void city_cycle_awake(simulated_being *local) {
+//    n_int loc_s = being_speed(local);
+//    n_int loc_h = being_height(local);
+//    n_int tmp_speed = being_random(local) & 3;
+//    n_byte loc_state = BEING_STATE_ASLEEP;
+//    n_vect2 being_location;
+//
+//    being_location.x = being_location_x(local);
+//    being_location.y = being_location_y(local);
+//
+//    if (local->delta.awake != FULLY_ASLEEP) {
+//        loc_state |= BEING_STATE_AWAKE;
+//    }
+//
+//    if (loc_s != 0) {
+//        loc_state |= BEING_STATE_MOVING;
+//    }
+//
+//    being_nearest nearest;
+//    nearest.opposite_sex = 0L;
+//    nearest.same_sex = 0L;
+//
+//    {
+//        n_vect2 straight_close, straight_medium, straight_far, location;
+//        being_facing_vector(local, &straight_close, 16);
+//        vect2_add(&location, &being_location, &straight_close);
+//
+//        if (city_line_of_sight(local, &location)) {
+//            being_facing_vector(local, &straight_medium, 4);
+//            vect2_add(&location, &being_location, &straight_medium);
+//
+//            if (city_line_of_sight(local, &location)) {
+//                // Handle line of sight logic
+//            }
+//        } else {
+//            // Handle no line of sight logic
+//        }
+//
+//        being_facing_vector(local, &straight_far, 1);
+//    }
+//
+//    being_set_height(local, loc_h);
+//    being_set_state(local, loc_state);
+//    city_calculate_speed(local, tmp_speed, loc_state);
+//    being_genetic_wandering(local, &nearest);
 
-    being_location.x = being_location_x(local);
-    being_location.y = being_location_y(local);
-
-    if (local->delta.awake != FULLY_ASLEEP) {
-        loc_state |= BEING_STATE_AWAKE;
-    }
-
-    if (loc_s != 0) {
-        loc_state |= BEING_STATE_MOVING;
-    }
-
-    being_nearest nearest;
-    nearest.opposite_sex = 0L;
-    nearest.same_sex = 0L;
-
-    {
-        n_vect2 straight_close, straight_medium, straight_far, location;
-        being_facing_vector(local, &straight_close, 16);
-        vect2_add(&location, &being_location, &straight_close);
-
-        if (city_line_of_sight(local, &location)) {
-            being_facing_vector(local, &straight_medium, 4);
-            vect2_add(&location, &being_location, &straight_medium);
-
-            if (city_line_of_sight(local, &location)) {
-                // Handle line of sight logic
-            }
-        } else {
-            // Handle no line of sight logic
-        }
-
-        being_facing_vector(local, &straight_far, 1);
-    }
-
-    being_set_height(local, loc_h);
-    being_set_state(local, loc_state);
-    city_calculate_speed(local, tmp_speed, loc_state);
-    being_genetic_wandering(local, &nearest);
-
-#ifdef TERRITORY_ON
-    being_territory_index(local);
-#endif
-}
+//#ifdef TERRITORY_ON
+//    being_territory_index(local);
+//#endif
+//}
 
 // Main city cycle function
-void city_cycle(void) {
-    n_uint loop = 0;
-    n_int max_honor = 0;
-
-    // Set all beings to fully awake
-    while (loop < beings_number) {
-        beings[loop].delta.awake = FULLY_AWAKE;
-        loop++;
-    }
-
-    loop = 0;
-    while (loop < beings_number) {
-        simulated_being *local = &beings[loop];
-
-        n_int immune_energy_used = immune_response(&local->immune_system, being_honor_immune(local), being_energy(local));
-        NA_ASSERT((immune_energy_used >= 0), "Positive energy added back from immune response");
-
-        if (immune_energy_used > 0) {
-            being_energy_delta(local, 0 - immune_energy_used);
-        }
-
-#ifdef BRAINCODE_ON
-#ifdef BRAIN_ON
-        // Handle brain-related logic if enabled
-#endif
-#endif
-
-        if ((local->delta.awake == 0) && local) {
-            being_set_state(local, BEING_STATE_ASLEEP);
-            being_reset_drive(local, DRIVE_FATIGUE);
-        }
-
-        loop++;
-    }
-
-    // Handle listening, episodic cycles, and other behaviors
-    loop = 0;
-    while (loop < beings_number) {
-        city_listen(beings, beings_number, &beings[loop]);
-        loop++;
-    }
-
-    loop = 0;
-    while (loop < beings_number) {
-        episodic_cycle_no_sim(&beings[loop]);
-        loop++;
-    }
-
-    loop = 0;
-    while (loop < beings_number) {
-        city_cycle_awake(&beings[loop]);
-        loop++;
-    }
-
-    loop = 0;
-    while (loop < beings_number) {
-        drives_hunger(&beings[loop]);
-        loop++;
-    }
-
-    loop = 0;
-    while (loop < beings_number) {
-        city_sociability(beings, beings_number, &beings[loop]);
-        loop++;
-    }
-
-    loop = 0;
-    while (loop < beings_number) {
-        drives_fatigue(&beings[loop]);
-        loop++;
-    }
-
-    loop = 0;
-    while (loop < beings_number) {
-        being_tidy_loop_no_sim(&beings[loop], &max_honor);
-        loop++;
-    }
-
-    if (max_honor) {
-        loop = 0;
-        while (loop < beings_number) {
-            being_recalibrate_honor_loop_no_sim(&beings[loop]);
-            loop++;
-        }
-    }
-}
+//void city_cycle(void) {
+//    n_uint loop = 0;
+//    n_int max_honor = 0;
+//
+//    // Set all beings to fully awake
+//    while (loop < beings_number) {
+//        beings[loop].delta.awake = FULLY_AWAKE;
+//        loop++;
+//    }
+//
+//    loop = 0;
+//    while (loop < beings_number) {
+//        simulated_being *local = &beings[loop];
+//
+//        n_int immune_energy_used = immune_response(&local->immune_system, being_honor_immune(local), being_energy(local));
+//        NA_ASSERT((immune_energy_used >= 0), "Positive energy added back from immune response");
+//
+//        if (immune_energy_used > 0) {
+//            being_energy_delta(local, 0 - immune_energy_used);
+//        }
+//
+//#ifdef BRAINCODE_ON
+//#ifdef BRAIN_ON
+//        // Handle brain-related logic if enabled
+//#endif
+//#endif
+//
+//        if ((local->delta.awake == 0) && local) {
+//            being_set_state(local, BEING_STATE_ASLEEP);
+//            being_reset_drive(local, DRIVE_FATIGUE);
+//        }
+//
+//        loop++;
+//    }
+//
+//    // Handle listening, episodic cycles, and other behaviors
+//    loop = 0;
+//    while (loop < beings_number) {
+//        city_listen(beings, beings_number, &beings[loop]);
+//        loop++;
+//    }
+//
+//    loop = 0;
+//    while (loop < beings_number) {
+//        episodic_cycle_no_sim(&beings[loop]);
+//        loop++;
+//    }
+//
+//    loop = 0;
+//    while (loop < beings_number) {
+//        city_cycle_awake(&beings[loop]);
+//        loop++;
+//    }
+//
+//    loop = 0;
+//    while (loop < beings_number) {
+//        drives_hunger(&beings[loop]);
+//        loop++;
+//    }
+//
+//    loop = 0;
+//    while (loop < beings_number) {
+//        city_sociability(beings, beings_number, &beings[loop]);
+//        loop++;
+//    }
+//
+//    loop = 0;
+//    while (loop < beings_number) {
+//        drives_fatigue(&beings[loop]);
+//        loop++;
+//    }
+//
+//    loop = 0;
+//    while (loop < beings_number) {
+//        being_tidy_loop_no_sim(&beings[loop], &max_honor);
+//        loop++;
+//    }
+//
+//    if (max_honor) {
+//        loop = 0;
+//        while (loop < beings_number) {
+//            being_recalibrate_honor_loop_no_sim(&beings[loop]);
+//            loop++;
+//        }
+//    }
+//}

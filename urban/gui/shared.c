@@ -293,7 +293,7 @@ n_byte * shared_draw(n_int fIdentification, n_int dim_x, n_int dim_y, n_byte siz
     agent_zoom(zoomed_delta);
     agent_move(move_delta);
     agent_cycle();
-    city_cycle();
+//    city_cycle();
     if (draw_game_scene(dim_x, dim_y))
     {
         draw_render(outputBuffer, dim_x, dim_y);

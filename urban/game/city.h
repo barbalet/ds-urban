@@ -35,7 +35,6 @@
 
 
 #include "../game/mushroom.h"
-#include "../../apesdk/entity/entity.h"
 
 
 #define NEIGHBORHOOD_UNIT_SPACE (3400)
@@ -57,12 +56,9 @@
 #define PARK_PROBABILITY  ((255 * TWO_BLOCK_NUM) / (PARK_NUM + TWO_BLOCK_NUM))
 
 void city_init(n_byte2 * seed);
-void city_cycle(void);
+//void city_cycle(void);
 
 void city_translate(n_vect2 * pnt);
-
-simulated_being * city_beings(void);
-n_uint city_beings_number(void);
 
 simulated_twoblock * neighborhoood_twoblock(n_int * count);
 simulated_park * neighborhoood_park(n_int * count);

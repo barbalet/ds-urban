@@ -37,6 +37,8 @@ glrender.c
  *  \brief  Handles low level graphics
  */
 
+
+#include <stdio.h>
 #include "glrender.h"
 
 typedef struct

@@ -36,7 +36,6 @@
 #define _MUSHROOM_H
 
 #include "../../apesdk/toolkit/toolkit.h"
-#include "../../apesdk/sim/sim.h"
 
 #undef DEBUG_BLOCKING_BOUNDARIES
 

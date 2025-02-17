@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		4A0CBEE71F78B0B40038948D /* park.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A0CBEE61F78B0B40038948D /* park.c */; };
 		4A2BF40327F4078200517880 /* city.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A2BF40127F4078200517880 /* city.c */; };
-		4A4AD3942D05B4EA004B8476 /* spacetime.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A4AD3932D05B4EA004B8476 /* spacetime.c */; };
 		4A55A64320048CB9008EE3DF /* matrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A55A64220048CB8008EE3DF /* matrix.c */; };
 		4A723A102A74CD28000EB0A4 /* pnglite.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A723A0E2A74CD28000EB0A4 /* pnglite.c */; };
 		4A723A112A74CD28000EB0A4 /* pngload.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A723A0F2A74CD28000EB0A4 /* pngload.c */; };
@@ -17,27 +16,6 @@
 		4A916BBD1F782C1A0080F27F /* twoblock.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A916BBC1F782C1A0080F27F /* twoblock.c */; };
 		4A916BC11F783E180080F27F /* neighborhood.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A916BC01F783E180080F27F /* neighborhood.c */; };
 		4ABA181E1F5E643B00DFD769 /* tree.c in Sources */ = {isa = PBXBuildFile; fileRef = 4ABA181D1F5E643B00DFD769 /* tree.c */; };
-		4AC319BE29BAA4550061D099 /* food.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AC319B229BAA4540061D099 /* food.c */; };
-		4AC319BF29BAA4550061D099 /* drives.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AC319B329BAA4540061D099 /* drives.c */; };
-		4AC319C029BAA4550061D099 /* episodic.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AC319B429BAA4540061D099 /* episodic.c */; };
-		4AC319C129BAA4550061D099 /* being.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AC319B529BAA4540061D099 /* being.c */; };
-		4AC319C229BAA4550061D099 /* body.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AC319B629BAA4540061D099 /* body.c */; };
-		4AC319C329BAA4550061D099 /* brain.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AC319B829BAA4550061D099 /* brain.c */; };
-		4AC319C429BAA4550061D099 /* skeleton.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AC319BA29BAA4550061D099 /* skeleton.c */; };
-		4AC319C529BAA4550061D099 /* immune.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AC319BB29BAA4550061D099 /* immune.c */; };
-		4AC319C629BAA4550061D099 /* social.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AC319BC29BAA4550061D099 /* social.c */; };
-		4AC319C729BAA4550061D099 /* speak.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AC319BD29BAA4550061D099 /* speak.c */; };
-		4AC319CE29BAA4730061D099 /* transfer.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AC319C829BAA4720061D099 /* transfer.c */; };
-		4AC319CF29BAA4730061D099 /* sim.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AC319CB29BAA4720061D099 /* sim.c */; };
-		4AC319D029BAA4730061D099 /* loop.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AC319CC29BAA4720061D099 /* loop.c */; };
-		4AC319D129BAA4730061D099 /* command.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AC319CD29BAA4730061D099 /* command.c */; };
-		4AC319D529BAA4900061D099 /* interpret.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AC319D229BAA4900061D099 /* interpret.c */; };
-		4AC319D629BAA4900061D099 /* parse.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AC319D329BAA4900061D099 /* parse.c */; };
-		4AC319DD29BAA4AC0061D099 /* land.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AC319D729BAA4AB0061D099 /* land.c */; };
-		4AC319DE29BAA4AC0061D099 /* console.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AC319D829BAA4AC0061D099 /* console.c */; };
-		4AC319DF29BAA4AC0061D099 /* tile.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AC319DA29BAA4AC0061D099 /* tile.c */; };
-		4AC319E029BAA4AC0061D099 /* territory.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AC319DB29BAA4AC0061D099 /* territory.c */; };
-		4AC319E129BAA4AC0061D099 /* audio.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AC319DC29BAA4AC0061D099 /* audio.c */; };
 		4AC319EC29BAA4DA0061D099 /* ASMacView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC319E229BAA4D90061D099 /* ASMacView.m */; };
 		4AC319ED29BAA4DA0061D099 /* ASShared.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC319E329BAA4D90061D099 /* ASShared.m */; };
 		4AC319EE29BAA4DA0061D099 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC319E429BAA4D90061D099 /* main.m */; };
@@ -81,7 +59,6 @@
 		4A0CBEE61F78B0B40038948D /* park.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = park.c; sourceTree = "<group>"; };
 		4A2BF40127F4078200517880 /* city.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = city.c; sourceTree = "<group>"; };
 		4A2BF40227F4078200517880 /* city.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = city.h; sourceTree = "<group>"; };
-		4A4AD3932D05B4EA004B8476 /* spacetime.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = spacetime.c; path = /Users/barbalet/compar/here/simulatedape/apesdk/sim/spacetime.c; sourceTree = "<absolute>"; };
 		4A55A64220048CB8008EE3DF /* matrix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = matrix.c; sourceTree = "<group>"; };
 		4A723A0D2A74CD28000EB0A4 /* pnglite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pnglite.h; path = ../../../apesdk/external/png/pnglite.h; sourceTree = "<group>"; };
 		4A723A0E2A74CD28000EB0A4 /* pnglite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pnglite.c; path = ../../../apesdk/external/png/pnglite.c; sourceTree = "<group>"; };
@@ -90,33 +67,6 @@
 		4A916BBC1F782C1A0080F27F /* twoblock.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = twoblock.c; sourceTree = "<group>"; };
 		4A916BC01F783E180080F27F /* neighborhood.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = neighborhood.c; sourceTree = "<group>"; };
 		4ABA181D1F5E643B00DFD769 /* tree.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tree.c; sourceTree = "<group>"; };
-		4AC319B229BAA4540061D099 /* food.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = food.c; path = ../../../apesdk/entity/food.c; sourceTree = "<group>"; };
-		4AC319B329BAA4540061D099 /* drives.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = drives.c; path = ../../../apesdk/entity/drives.c; sourceTree = "<group>"; };
-		4AC319B429BAA4540061D099 /* episodic.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = episodic.c; path = ../../../apesdk/entity/episodic.c; sourceTree = "<group>"; };
-		4AC319B529BAA4540061D099 /* being.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = being.c; path = ../../../apesdk/entity/being.c; sourceTree = "<group>"; };
-		4AC319B629BAA4540061D099 /* body.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = body.c; path = ../../../apesdk/entity/body.c; sourceTree = "<group>"; };
-		4AC319B729BAA4540061D099 /* entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = entity.h; path = ../../../apesdk/entity/entity.h; sourceTree = "<group>"; };
-		4AC319B829BAA4550061D099 /* brain.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = brain.c; path = ../../../apesdk/entity/brain.c; sourceTree = "<group>"; };
-		4AC319B929BAA4550061D099 /* entity_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = entity_internal.h; path = ../../../apesdk/entity/entity_internal.h; sourceTree = "<group>"; };
-		4AC319BA29BAA4550061D099 /* skeleton.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = skeleton.c; path = ../../../apesdk/entity/skeleton.c; sourceTree = "<group>"; };
-		4AC319BB29BAA4550061D099 /* immune.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = immune.c; path = ../../../apesdk/entity/immune.c; sourceTree = "<group>"; };
-		4AC319BC29BAA4550061D099 /* social.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = social.c; path = ../../../apesdk/entity/social.c; sourceTree = "<group>"; };
-		4AC319BD29BAA4550061D099 /* speak.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = speak.c; path = ../../../apesdk/entity/speak.c; sourceTree = "<group>"; };
-		4AC319C829BAA4720061D099 /* transfer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = transfer.c; path = ../../../apesdk/universe/transfer.c; sourceTree = "<group>"; };
-		4AC319C929BAA4720061D099 /* universe_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = universe_internal.h; path = ../../../apesdk/universe/universe_internal.h; sourceTree = "<group>"; };
-		4AC319CA29BAA4720061D099 /* universe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = universe.h; path = ../../../apesdk/universe/universe.h; sourceTree = "<group>"; };
-		4AC319CB29BAA4720061D099 /* sim.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sim.c; path = ../../../apesdk/universe/sim.c; sourceTree = "<group>"; };
-		4AC319CC29BAA4720061D099 /* loop.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = loop.c; path = ../../../apesdk/universe/loop.c; sourceTree = "<group>"; };
-		4AC319CD29BAA4730061D099 /* command.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = command.c; path = ../../../apesdk/universe/command.c; sourceTree = "<group>"; };
-		4AC319D229BAA4900061D099 /* interpret.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = interpret.c; path = ../../../apesdk/script/interpret.c; sourceTree = "<group>"; };
-		4AC319D329BAA4900061D099 /* parse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = parse.c; path = ../../../apesdk/script/parse.c; sourceTree = "<group>"; };
-		4AC319D429BAA4900061D099 /* script.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = script.h; path = ../../../apesdk/script/script.h; sourceTree = "<group>"; };
-		4AC319D729BAA4AB0061D099 /* land.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = land.c; path = ../../../apesdk/sim/land.c; sourceTree = "<group>"; };
-		4AC319D829BAA4AC0061D099 /* console.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = console.c; path = ../../../apesdk/sim/console.c; sourceTree = "<group>"; };
-		4AC319D929BAA4AC0061D099 /* sim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sim.h; path = ../../../apesdk/sim/sim.h; sourceTree = "<group>"; };
-		4AC319DA29BAA4AC0061D099 /* tile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = tile.c; path = ../../../apesdk/sim/tile.c; sourceTree = "<group>"; };
-		4AC319DB29BAA4AC0061D099 /* territory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = territory.c; path = ../../../apesdk/sim/territory.c; sourceTree = "<group>"; };
-		4AC319DC29BAA4AC0061D099 /* audio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = audio.c; path = ../../../apesdk/sim/audio.c; sourceTree = "<group>"; };
 		4AC319E229BAA4D90061D099 /* ASMacView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASMacView.m; path = ../../../apesdk/mac/ASMacView.m; sourceTree = "<group>"; };
 		4AC319E329BAA4D90061D099 /* ASShared.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASShared.m; path = ../../../apesdk/mac/ASShared.m; sourceTree = "<group>"; };
 		4AC319E429BAA4D90061D099 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ../../../apesdk/mac/main.m; sourceTree = "<group>"; };
@@ -182,49 +132,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4A346554232DD5650015237B /* script */ = {
-			isa = PBXGroup;
-			children = (
-				4AC319D229BAA4900061D099 /* interpret.c */,
-				4AC319D329BAA4900061D099 /* parse.c */,
-				4AC319D429BAA4900061D099 /* script.h */,
-			);
-			name = script;
-			sourceTree = "<group>";
-		};
-		4A346555232DD56E0015237B /* sim */ = {
-			isa = PBXGroup;
-			children = (
-				4A4AD3932D05B4EA004B8476 /* spacetime.c */,
-				4AC319DC29BAA4AC0061D099 /* audio.c */,
-				4AC319D829BAA4AC0061D099 /* console.c */,
-				4AC319D729BAA4AB0061D099 /* land.c */,
-				4AC319D929BAA4AC0061D099 /* sim.h */,
-				4AC319DB29BAA4AC0061D099 /* territory.c */,
-				4AC319DA29BAA4AC0061D099 /* tile.c */,
-			);
-			name = sim;
-			sourceTree = "<group>";
-		};
-		4A36DB6820F08112007E283E /* entity */ = {
-			isa = PBXGroup;
-			children = (
-				4AC319B529BAA4540061D099 /* being.c */,
-				4AC319B629BAA4540061D099 /* body.c */,
-				4AC319B829BAA4550061D099 /* brain.c */,
-				4AC319B329BAA4540061D099 /* drives.c */,
-				4AC319B929BAA4550061D099 /* entity_internal.h */,
-				4AC319B729BAA4540061D099 /* entity.h */,
-				4AC319B429BAA4540061D099 /* episodic.c */,
-				4AC319B229BAA4540061D099 /* food.c */,
-				4AC319BB29BAA4550061D099 /* immune.c */,
-				4AC319BA29BAA4550061D099 /* skeleton.c */,
-				4AC319BC29BAA4550061D099 /* social.c */,
-				4AC319BD29BAA4550061D099 /* speak.c */,
-			);
-			name = entity;
-			sourceTree = "<group>";
-		};
 		4A723A0C2A74CD0A000EB0A4 /* png */ = {
 			isa = PBXGroup;
 			children = (
@@ -275,19 +182,6 @@
 				4AC319E729BAA4D90061D099 /* urban.xib */,
 			);
 			name = mac;
-			sourceTree = "<group>";
-		};
-		4ACD2EF420FB0F4900D3A302 /* universe */ = {
-			isa = PBXGroup;
-			children = (
-				4AC319CD29BAA4730061D099 /* command.c */,
-				4AC319CC29BAA4720061D099 /* loop.c */,
-				4AC319CB29BAA4720061D099 /* sim.c */,
-				4AC319C829BAA4720061D099 /* transfer.c */,
-				4AC319C929BAA4720061D099 /* universe_internal.h */,
-				4AC319CA29BAA4720061D099 /* universe.h */,
-			);
-			name = universe;
 			sourceTree = "<group>";
 		};
 		5A0D60DE19567F8E00090DAE /* game */ = {
@@ -367,10 +261,6 @@
 				4A8F1677254151D60013832D /* render */,
 				4A9FDB7B241D7542002200C1 /* toolkit */,
 				4AB8DEDA240B3E3200A7AD03 /* mac */,
-				4A346555232DD56E0015237B /* sim */,
-				4A346554232DD5650015237B /* script */,
-				4ACD2EF420FB0F4900D3A302 /* universe */,
-				4A36DB6820F08112007E283E /* entity */,
 				5A0D60DE19567F8E00090DAE /* game */,
 				5A0D60E319567F8E00090DAE /* gui */,
 				5A37A3C01955F32800D187B0 /* Supporting Files */,
@@ -508,54 +398,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4AC319C129BAA4550061D099 /* being.c in Sources */,
 				5A0D60E719567F8E00090DAE /* house.c in Sources */,
-				4AC319C029BAA4550061D099 /* episodic.c in Sources */,
-				4AC319C529BAA4550061D099 /* immune.c in Sources */,
 				4AFB715E2A74C67A0007863A /* draw.c in Sources */,
-				4AC319C329BAA4550061D099 /* brain.c in Sources */,
-				4AC319E029BAA4AC0061D099 /* territory.c in Sources */,
 				4A723A102A74CD28000EB0A4 /* pnglite.c in Sources */,
 				4AC31A0329BAA50E0061D099 /* glrender.c in Sources */,
 				4AC319FE29BAA4F60061D099 /* vect.c in Sources */,
-				4AC319D129BAA4730061D099 /* command.c in Sources */,
 				4AC319ED29BAA4DA0061D099 /* ASShared.m in Sources */,
-				4AC319CF29BAA4730061D099 /* sim.c in Sources */,
-				4AC319D029BAA4730061D099 /* loop.c in Sources */,
-				4AC319C429BAA4550061D099 /* skeleton.c in Sources */,
 				4AC319F929BAA4F60061D099 /* io.c in Sources */,
 				4A2BF40327F4078200517880 /* city.c in Sources */,
-				4AC319C629BAA4550061D099 /* social.c in Sources */,
-				4AC319BE29BAA4550061D099 /* food.c in Sources */,
 				4AC319EC29BAA4DA0061D099 /* ASMacView.m in Sources */,
 				4AC31A0429BAA50E0061D099 /* graph.c in Sources */,
 				4A0CBEE71F78B0B40038948D /* park.c in Sources */,
 				4AC319FC29BAA4F60061D099 /* memory.c in Sources */,
 				5A6AD3F71AE0D493008CB27B /* agent.c in Sources */,
 				7B0542271C3864C00079EF20 /* road.c in Sources */,
-				4AC319DF29BAA4AC0061D099 /* tile.c in Sources */,
 				4AC319FA29BAA4F60061D099 /* math.c in Sources */,
 				4AC319FB29BAA4F60061D099 /* file.c in Sources */,
-				4AC319BF29BAA4550061D099 /* drives.c in Sources */,
-				4AC319D629BAA4900061D099 /* parse.c in Sources */,
 				4A723A112A74CD28000EB0A4 /* pngload.c in Sources */,
-				4AC319DD29BAA4AC0061D099 /* land.c in Sources */,
-				4AC319CE29BAA4730061D099 /* transfer.c in Sources */,
 				4A916BBD1F782C1A0080F27F /* twoblock.c in Sources */,
-				4AC319E129BAA4AC0061D099 /* audio.c in Sources */,
-				4AC319C729BAA4550061D099 /* speak.c in Sources */,
 				4ABA181E1F5E643B00DFD769 /* tree.c in Sources */,
 				4A55A64320048CB9008EE3DF /* matrix.c in Sources */,
 				4A8506132593BEC2000479C6 /* game_objects.c in Sources */,
-				4AC319C229BAA4550061D099 /* body.c in Sources */,
 				4AC319F129BAA4DA0061D099 /* AppDelegate.m in Sources */,
-				4AC319DE29BAA4AC0061D099 /* console.c in Sources */,
 				4AFB715F2A74C67A0007863A /* shared.c in Sources */,
-				4AC319D529BAA4900061D099 /* interpret.c in Sources */,
 				4AC319EE29BAA4DA0061D099 /* main.m in Sources */,
 				4AC319FD29BAA4F60061D099 /* object.c in Sources */,
 				4AC319F029BAA4DA0061D099 /* ASMacCG.m in Sources */,
-				4A4AD3942D05B4EA004B8476 /* spacetime.c in Sources */,
 				7B0542261C3864C00079EF20 /* fence.c in Sources */,
 				4A916BC11F783E180080F27F /* neighborhood.c in Sources */,
 			);
