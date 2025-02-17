@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4A0CBEE71F78B0B40038948D /* park.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A0CBEE61F78B0B40038948D /* park.c */; };
-		4A2BF40327F4078200517880 /* city.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A2BF40127F4078200517880 /* city.c */; };
 		4A55A64320048CB9008EE3DF /* matrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A55A64220048CB8008EE3DF /* matrix.c */; };
 		4A723A102A74CD28000EB0A4 /* pnglite.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A723A0E2A74CD28000EB0A4 /* pnglite.c */; };
 		4A723A112A74CD28000EB0A4 /* pngload.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A723A0F2A74CD28000EB0A4 /* pngload.c */; };
@@ -57,8 +56,6 @@
 
 /* Begin PBXFileReference section */
 		4A0CBEE61F78B0B40038948D /* park.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = park.c; sourceTree = "<group>"; };
-		4A2BF40127F4078200517880 /* city.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = city.c; sourceTree = "<group>"; };
-		4A2BF40227F4078200517880 /* city.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = city.h; sourceTree = "<group>"; };
 		4A55A64220048CB8008EE3DF /* matrix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = matrix.c; sourceTree = "<group>"; };
 		4A723A0D2A74CD28000EB0A4 /* pnglite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pnglite.h; path = ../../../apesdk/external/png/pnglite.h; sourceTree = "<group>"; };
 		4A723A0E2A74CD28000EB0A4 /* pnglite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pnglite.c; path = ../../../apesdk/external/png/pnglite.c; sourceTree = "<group>"; };
@@ -187,8 +184,6 @@
 		5A0D60DE19567F8E00090DAE /* game */ = {
 			isa = PBXGroup;
 			children = (
-				4A2BF40127F4078200517880 /* city.c */,
-				4A2BF40227F4078200517880 /* city.h */,
 				4A55A64220048CB8008EE3DF /* matrix.c */,
 				7B0542241C3864C00079EF20 /* fence.c */,
 				4A916BBC1F782C1A0080F27F /* twoblock.c */,
@@ -405,7 +400,6 @@
 				4AC319FE29BAA4F60061D099 /* vect.c in Sources */,
 				4AC319ED29BAA4DA0061D099 /* ASShared.m in Sources */,
 				4AC319F929BAA4F60061D099 /* io.c in Sources */,
-				4A2BF40327F4078200517880 /* city.c in Sources */,
 				4AC319EC29BAA4DA0061D099 /* ASMacView.m in Sources */,
 				4AC31A0429BAA50E0061D099 /* graph.c in Sources */,
 				4A0CBEE71F78B0B40038948D /* park.c in Sources */,

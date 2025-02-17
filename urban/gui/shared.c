@@ -37,7 +37,6 @@
 #include "../../apesdk/shared.h"
 #include "../../apesdk/render/graph.h"
 #include "../game/mushroom.h"
-#include "../game/city.h"
 
 #include <stdio.h>
 
@@ -96,7 +95,6 @@ n_int shared_init(n_int view, n_uint random)
     math_random(seed);
     
     neighborhood_init(seed);
-    city_init(seed);
     agent_init();
     
     return 0;

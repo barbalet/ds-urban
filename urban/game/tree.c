@@ -32,18 +32,6 @@
  this software.
  
  ****************************************************************/
-/****************************************************************
- 
- tree.c
- 
- Copyright 1996-2025 Tom Barbalet. All rights reserved.
- 
- Permission is granted to use, modify, and distribute this software freely,
- provided the copyright notice and permission notice are included in all copies.
- 
- THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND.
- 
- ****************************************************************/
 
 #include "mushroom.h"
 

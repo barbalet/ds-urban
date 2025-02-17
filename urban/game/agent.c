@@ -37,64 +37,64 @@
 
 static simulated_agent mushroom_boy;
 
-void agent_init(void)
-{
-    mushroom_boy.location.x = 0;
-    mushroom_boy.location.y = 0;
-    mushroom_boy.facing = 0;
-    mushroom_boy.zooming = 0;
+// Initialize the agent's position, facing direction, and zoom level
+void agent_init(void) {
+    mushroom_boy.location = (n_vect2){0, 0}; // Start at origin
+    mushroom_boy.facing = 0;                 // Facing default direction
+    mushroom_boy.zooming = 0;                // No zoom initially
 }
 
-n_vect2 * agent_location(void)
-{
+// Get the agent's current location
+n_vect2* agent_location(void) {
     return &mushroom_boy.location;
 }
 
-
-n_int agent_facing(void)
-{
+// Get the agent's current facing direction
+n_int agent_facing(void) {
     return mushroom_boy.facing;
 }
 
-void agent_turn(n_int delta)
-{
+// Turn the agent by a specified delta
+void agent_turn(n_int delta) {
     mushroom_boy.facing_delta += delta;
 }
 
-void agent_zoom(n_int zoom)
-{
+// Adjust the agent's zoom level within bounds
+void agent_zoom(n_int zoom) {
     n_int total_zoom = mushroom_boy.zooming + zoom;
-    if ((total_zoom > -99) && (total_zoom < 120))
-    {
+    if (total_zoom > -99 && total_zoom < 120) { // Keep zoom within limits
         mushroom_boy.zooming = total_zoom;
     }
 }
 
-n_int agent_zooming(void)
-{
+// Get the agent's current zoom level
+n_int agent_zooming(void) {
     return mushroom_boy.zooming;
 }
 
-void agent_move(n_int forwards)
-{
-    n_vect2 direction;
-    n_vect2 local_location;
-    n_vect2 * copy_location = agent_location();
-    n_int   translated_facing;
-    vect2_copy(&local_location, copy_location);
-    
+// Move the agent forward or backward
+void agent_move(n_int distance) {
+    n_vect2 direction, local_location;
+    n_vect2* current_location = agent_location();
+    n_int translated_facing;
+
+    // Save the current location
+    vect2_copy(&local_location, current_location);
+
+    // Update the agent's facing direction
     mushroom_boy.facing = (mushroom_boy.facing + mushroom_boy.facing_delta + 256) & 255;
-    
-    translated_facing = (128+64+256 - agent_facing())&255;
-    
+
+    // Calculate the direction vector based on the facing angle
+    translated_facing = (128 + 64 + 256 - agent_facing()) & 255;
     vect2_direction(&direction, translated_facing, 1);
-    vect2_d(copy_location, &direction, forwards, (26880/20));    
-    vect2_subtract(&mushroom_boy.location_delta, copy_location, &local_location);
+
+    // Move the agent and update the location delta
+    vect2_d(current_location, &direction, distance, 26880 / 20);
+    vect2_subtract(&mushroom_boy.location_delta, current_location, &local_location);
 }
 
-void agent_cycle(void)
-{
+// Reset the agent's state for the next cycle
+void agent_cycle(void) {
     mushroom_boy.facing_delta = 0;
-    mushroom_boy.location_delta.x = 0;
-    mushroom_boy.location_delta.y = 0;
+    mushroom_boy.location_delta = (n_vect2){0, 0};
 }

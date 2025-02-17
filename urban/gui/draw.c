@@ -35,7 +35,6 @@
 
 #include "../../apesdk/render/glrender.h"
 #include "../game/mushroom.h"
-#include "../game/city.h"
 
 
 #define TREE_COLOR     GLR_LIGHT_GREEN

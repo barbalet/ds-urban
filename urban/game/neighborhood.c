@@ -33,7 +33,6 @@
  
  ****************************************************************/
 
-#include "../game/city.h"
 #include "mushroom.h"
 
 static simulated_twoblock twoblock[TWO_BLOCK_NUM];

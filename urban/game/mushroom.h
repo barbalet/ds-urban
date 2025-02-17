@@ -37,6 +37,25 @@
 
 #include "../../apesdk/toolkit/toolkit.h"
 
+
+#define NEIGHBORHOOD_UNIT_SPACE (3400)
+#define TWO_BLOCK_EDGE_HALF     (4) // 4 (up to 8)
+#define TWO_BLOCK_EDGE          (TWO_BLOCK_EDGE_HALF * 2)
+
+#define MAX_NUMBER_APES  (256) // (TWO_BLOCK_EDGE * TWO_BLOCK_EDGE * 4)
+
+#define CITY_TOP_RIGHT_X ((NEIGHBORHOOD_UNIT_SPACE * TWO_BLOCK_EDGE_HALF) + 5 + (2*ROAD_WIDTH))
+#define CITY_TOP_RIGHT_Y ((NEIGHBORHOOD_UNIT_SPACE * TWO_BLOCK_EDGE_HALF) + 5 + (2*ROAD_WIDTH))
+
+#define CITY_BOTTOM_LEFT_X (0 - CITY_TOP_RIGHT_X )
+#define CITY_BOTTOM_LEFT_Y (0 - CITY_TOP_RIGHT_Y )
+
+#define PARK_NUM (TWO_BLOCK_EDGE_HALF)
+#define TWO_BLOCK_NUM ((TWO_BLOCK_EDGE * TWO_BLOCK_EDGE) - PARK_NUM)
+#define FENCE_NUM (4)
+
+#define PARK_PROBABILITY  ((255 * TWO_BLOCK_NUM) / (PARK_NUM + TWO_BLOCK_NUM))
+
 #undef DEBUG_BLOCKING_BOUNDARIES
 
 #undef DEBUG_ROOM_NUMBER
@@ -224,5 +243,9 @@ n_object * game_object_park(simulated_park * park);
 n_object * game_object_twoblock(simulated_twoblock * twoblock);
 
 void neighborhood_object(n_string file_location);
+
+simulated_twoblock * neighborhoood_twoblock(n_int * count);
+simulated_park * neighborhoood_park(n_int * count);
+simulated_fence * neighborhoood_fence(n_int * count);
 
 #endif /* _MUSHROOM_H */

@@ -35,7 +35,6 @@
 
 #include <stdio.h>
 #include "mushroom.h"
-#include "../game/city.h"
 
 // Global variables
 static memory_list *block_list;
