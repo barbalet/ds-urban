@@ -31,6 +31,213 @@
 
 #include "mushroom.h"
 
+#define FOOTPATH_OFFSET 300
+#define FOOTPATH_WIDTH  200 // 48 inches versus 144 inches
+
+
+// Creates a tree with random points and a center location.
+void tree_create(simulated_tree *tree, n_byte2 *seed, n_vect2 *center) {
+    n_int wandering = (math_random(seed) % 11) - 5; // Random starting offset
+
+    // Generate random points for the tree
+    for (n_int loop = 0; loop < POINTS_PER_TREE; loop++) {
+        wandering += (math_random(seed) % 11) - 5; // Randomly adjust wandering
+        tree->points[loop] = 60 - wandering;      // Set tree point
+    }
+
+    // Smooth the tree points by averaging with neighboring points
+    for (n_int loop = 0; loop < POINTS_PER_TREE; loop++) {
+        tree->points[loop] = (tree->points[(loop + POINTS_PER_TREE - 1) % POINTS_PER_TREE] +
+                              tree->points[loop] +
+                              tree->points[(loop + 1) % POINTS_PER_TREE]) / 3;
+    }
+
+    // Set the tree's center and radius
+    tree->center.x = center->x;
+    tree->center.y = center->y;
+    tree->radius = (math_random(seed) % 8) + 5; // Random radius between 5 and 12
+}
+
+// Generates a random offset for tree placement.
+static n_int tree_offset(n_byte2 *seed) {
+    return (math_random(seed) % 61) - 30; // Random offset between -30 and 30
+}
+
+// Clears all trees in the array.
+static void tree_clear(simulated_tree *trees) {
+    for (n_int loop = 0; loop < 4; loop++) {
+        trees[loop].center.x = 0;
+        trees[loop].center.y = 0;
+        trees[loop].radius = 0;
+    }
+}
+
+// Checks if a tree is populated (has a valid center or radius).
+n_int tree_populated(simulated_tree *tree) {
+    return (tree->center.x || tree->center.y || tree->radius) ? 1 : 0;
+}
+
+// Initializes trees randomly within a given edge boundary.
+void tree_init(simulated_tree *trees, n_byte2 *seed, n_vect2 *edge) {
+    n_byte mod = math_random(seed) & 15; // Random bitmask for tree placement
+    n_int count = 0;
+
+    tree_clear(trees); // Clear existing trees
+
+    // Place trees in a grid pattern based on the bitmask
+    for (n_int px = -1; px < 1; px++) {
+        for (n_int py = -1; py < 1; py++) {
+            if ((mod >> count) & 1) { // Check if the current bit is set
+                n_vect2 local_center;
+                simulated_tree *tree = &trees[count++];
+
+                // Calculate tree center with random offset
+                vect2_populate(&local_center,
+                               (px * TREE_SPACE) + (TREE_SPACE / 2) + tree_offset(seed),
+                               (py * TREE_SPACE) + (TREE_SPACE / 2) + tree_offset(seed));
+                vect2_delta(&local_center, edge); // Adjust for edge boundary
+
+                tree_create(tree, seed, &local_center); // Create the tree
+            }
+        }
+    }
+}
+
+/**
+ * Initializes a park with trees and roads.
+ *
+ * @param seed       A seed for random number generation.
+ * @param location   The base location of the park.
+ * @param parks      The simulated park structure to initialize.
+ */
+void park_init(n_byte2 *seed, n_vect2 *location, simulated_park *parks) {
+    n_int count = 0; // Counter for trees
+    n_int px = 0;    // X-axis grid position
+
+    // Initialize the road in the park
+    path_init(location, &parks->road, 0, 1);
+
+    // Loop through the park grid (4x4)
+    while (px < 4) {
+        n_int py = 0; // Y-axis grid position
+        while (py < 4) {
+            // Calculate the center of the current grid cell
+            n_vect2 local_center;
+            vect2_populate(&local_center,
+                          (px * RESIDENCE_SPACE) + location->x,
+                          (py * RESIDENCE_SPACE) + location->y);
+
+            // Initialize trees in the current grid cell
+            tree_init(parks->trees[count], seed, &local_center);
+
+            // Set random radii for populated trees
+            for (n_int i = 0; i < 4; i++) {
+                if (tree_populated(&parks->trees[count][i])) {
+                    parks->trees[count][i].radius = (math_random(seed) % 10) + 16;
+                }
+            }
+
+            count++; // Move to the next tree set
+            py++;    // Move to the next Y-axis position
+        }
+        px++; // Move to the next X-axis position
+    }
+}
+
+
+void path_set(n_vect2 * points, n_int px, n_int py)
+{
+    points[0].x = px;
+    points[0].y = py;
+    points[1].x = px;
+    points[1].y = py;
+    points[2].x = px;
+    points[2].y = py;
+    points[3].x = px;
+    points[3].y = py;
+}
+
+void path_init(n_vect2 * location, simulated_path_group * group, n_int rotation, n_int ringroad)
+{
+    n_int count = 0;
+    n_int px = 0;
+    n_int py = 0;
+    
+    px = 0;
+    while (px < 2)
+    {
+        simulated_path * temp_path = &group->paths[count++];
+        
+        path_set(temp_path->points,
+                     location->x + 0 - FOOTPATH_OFFSET - FOOTPATH_WIDTH,
+                     location->y + (px * RESIDENCE_SPACE * 4) - FOOTPATH_OFFSET - FOOTPATH_WIDTH);
+        
+        temp_path->points[1].x += (RESIDENCE_SPACE * 4);
+        temp_path->points[2].x += (RESIDENCE_SPACE * 4);
+        
+        temp_path->points[2].y += FOOTPATH_WIDTH;
+        temp_path->points[3].y += FOOTPATH_WIDTH;
+        
+        px++;
+    }
+    px = 0;
+    while (py < 2)
+    {
+        simulated_path * temp_path = &group->paths[count++];
+
+        path_set(temp_path->points,
+                     location->x + (py * RESIDENCE_SPACE * 4) - FOOTPATH_OFFSET - FOOTPATH_WIDTH,
+                     location->y + 0 - FOOTPATH_OFFSET - FOOTPATH_WIDTH);
+    
+        temp_path->points[1].y += (RESIDENCE_SPACE * 4);
+        temp_path->points[2].y += (RESIDENCE_SPACE * 4);
+        
+        if (py == 1)
+        {
+            temp_path->points[1].y += FOOTPATH_WIDTH;
+            temp_path->points[2].y += FOOTPATH_WIDTH;
+        }
+        
+        temp_path->points[2].x += FOOTPATH_WIDTH;
+        temp_path->points[3].x += FOOTPATH_WIDTH;
+    
+        py++;
+    }
+    
+    if (ringroad == 0)
+    {
+        simulated_path * temp_path = &group->paths[count++];
+
+        if (rotation)
+        {
+            path_set(temp_path->points,
+                     location->x + (RESIDENCE_SPACE * 2) - FOOTPATH_OFFSET - FOOTPATH_WIDTH,
+                     location->y + 0 - FOOTPATH_OFFSET - FOOTPATH_WIDTH);
+            
+            temp_path->points[1].y += (RESIDENCE_SPACE * 4);
+            temp_path->points[2].y += (RESIDENCE_SPACE * 4);
+            
+            temp_path->points[2].x += FOOTPATH_WIDTH;
+            temp_path->points[3].x += FOOTPATH_WIDTH;
+
+        }
+        else
+        {
+            path_set(temp_path->points,
+                     location->x + 0 - FOOTPATH_OFFSET - FOOTPATH_WIDTH ,
+                     location->y + (RESIDENCE_SPACE * 2) - FOOTPATH_OFFSET - FOOTPATH_WIDTH);
+            
+            temp_path->points[1].x += (RESIDENCE_SPACE * 4);
+            temp_path->points[2].x += (RESIDENCE_SPACE * 4);
+            
+            temp_path->points[2].y += FOOTPATH_WIDTH;
+            temp_path->points[3].y += FOOTPATH_WIDTH;
+        }
+    }
+    group->number = count;
+}
+
+
 // Function to rotate a point around a center using a direction vector
 static void house_rotate_logic(n_vect2 *point, n_vect2 *points_center, n_vect2 *direction_vector, n_vect2 *center) {
     vect2_subtract(point, point, points_center);
@@ -273,5 +480,57 @@ void house_init(n_byte2 *seed, n_vect2 *location, simulated_building *buildings)
             py++;
         }
         px++;
+    }
+}
+
+void fence_init(n_byte2 *seed, n_byte rotate, n_vect2 *location, simulated_fence *fences) {
+    n_int count = 0;
+
+    // Generate long fences
+    for (n_int px = 0; px < 2; px++) {
+        for (n_int py = 0; py < 1; py++) {
+            simulated_fence *fence = &fences[count++];
+            n_int wabble_x1 = (math_random(seed) % FENCE_WABBLE_SPACE - (FENCE_WABBLE_SPACE / 2));
+            n_int wabble_y1 = (math_random(seed) % FENCE_WABBLE_SPACE - (FENCE_WABBLE_SPACE / 2));
+            n_int wabble_x2 = (math_random(seed) % FENCE_WABBLE_SPACE - (FENCE_WABBLE_SPACE / 2));
+            n_int wabble_y2 = (math_random(seed) % FENCE_WABBLE_SPACE - (FENCE_WABBLE_SPACE / 2));
+
+            if (rotate) {
+                fence->points[0].x = wabble_x1 + location->x + (px * RESIDENCE_SPACE * 2) + FENCE_OFFSET;
+                fence->points[0].y = wabble_y1 + location->y + (py * RESIDENCE_SPACE * 4) + FENCE_START;
+                fence->points[1].x = wabble_x2 + location->x + (px * RESIDENCE_SPACE * 2) + FENCE_OFFSET;
+                fence->points[1].y = wabble_y2 + location->y + (py * RESIDENCE_SPACE * 4) + FENCE_END_LONG;
+            } else {
+                fence->points[0].x = wabble_x1 + location->x + (py * RESIDENCE_SPACE * 4) + FENCE_START;
+                fence->points[0].y = wabble_y1 + location->y + (px * RESIDENCE_SPACE * 2) + FENCE_OFFSET;
+                fence->points[1].x = wabble_x2 + location->x + (py * RESIDENCE_SPACE * 4) + FENCE_END_LONG;
+                fence->points[1].y = wabble_y2 + location->y + (px * RESIDENCE_SPACE * 2) + FENCE_OFFSET;
+            }
+        }
+    }
+
+    // Generate short fences
+    for (n_int px = 0; px < 4; px++) {
+        for (n_int py = 0; py < 2; py++) {
+            if (((px + 4) & 3) != 3) { // Skip every 4th fence
+                simulated_fence *fence = &fences[count++];
+                n_int wabble_x1 = (math_random(seed) % FENCE_WABBLE_SPACE - (FENCE_WABBLE_SPACE / 2));
+                n_int wabble_y1 = (math_random(seed) % FENCE_WABBLE_SPACE - (FENCE_WABBLE_SPACE / 2));
+                n_int wabble_x2 = (math_random(seed) % FENCE_WABBLE_SPACE - (FENCE_WABBLE_SPACE / 2));
+                n_int wabble_y2 = (math_random(seed) % FENCE_WABBLE_SPACE - (FENCE_WABBLE_SPACE / 2));
+
+                if (rotate) {
+                    fence->points[0].x = wabble_x1 + location->x + (py * RESIDENCE_SPACE * 2) + FENCE_START;
+                    fence->points[0].y = wabble_y1 + location->y + (px * RESIDENCE_SPACE * 1) + FENCE_OFFSET;
+                    fence->points[1].x = wabble_x2 + location->x + (py * RESIDENCE_SPACE * 2) + FENCE_END_SHORT;
+                    fence->points[1].y = wabble_y2 + location->y + (px * RESIDENCE_SPACE * 1) + FENCE_OFFSET;
+                } else {
+                    fence->points[0].x = wabble_x1 + location->x + (px * RESIDENCE_SPACE * 1) + FENCE_OFFSET;
+                    fence->points[0].y = wabble_y1 + location->y + (py * RESIDENCE_SPACE * 2) + FENCE_START;
+                    fence->points[1].x = wabble_x2 + location->x + (px * RESIDENCE_SPACE * 1) + FENCE_OFFSET;
+                    fence->points[1].y = wabble_y2 + location->y + (py * RESIDENCE_SPACE * 2) + FENCE_END_SHORT;
+                }
+            }
+        }
     }
 }

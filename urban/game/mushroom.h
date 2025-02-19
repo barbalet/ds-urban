@@ -176,11 +176,6 @@ void park_draw(simulated_park * park);
 void neighborhood_init(n_byte2 * seed);
 void draw_neighborhood(void);
 
-void twoblock_init(n_byte2 * seed, n_vect2 * location, simulated_twoblock * twoblock);
-void draw_twoblock(simulated_twoblock * twoblock);
-
-void draw_city(void);
-
 n_int house_window_present(n_vect2 * window);
 n_int house_door_present(n_vect2 * door);
 

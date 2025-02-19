@@ -321,7 +321,7 @@ void draw_house(simulated_building * buildings)
     }
 }
 
-void draw_twoblock(simulated_twoblock * twoblock)
+static void draw_twoblock(simulated_twoblock * twoblock)
 {
     draw_path(&twoblock->road);
     //draw_path(&twoblock->footpath);
@@ -354,7 +354,7 @@ void draw_neighborhood(void)
     }
 }
 
-void draw_city(void)
+static void draw_city(void)
 {
 //    simulated_being *beings = city_beings();
 //    n_uint beings_number = city_beings_number();

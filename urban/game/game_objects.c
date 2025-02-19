@@ -35,6 +35,174 @@
 
 #include "mushroom.h"
 
+// Global variables
+static memory_list *block_list;
+static memory_list *draw_identifier_list;
+static n_int hit_block = 0;
+static n_int matrix_timer = 0;
+static simulated_agent mushroom_boy;
+
+// Initialize the agent's position, facing direction, and zoom level
+void agent_init(void) {
+    mushroom_boy.location = (n_vect2){0, 0}; // Start at origin
+    mushroom_boy.facing = 0;                 // Facing default direction
+    mushroom_boy.zooming = 0;                // No zoom initially
+}
+
+// Get the agent's current location
+n_vect2* agent_location(void) {
+    return &mushroom_boy.location;
+}
+
+// Get the agent's current facing direction
+n_int agent_facing(void) {
+    return mushroom_boy.facing;
+}
+
+// Turn the agent by a specified delta
+void agent_turn(n_int delta) {
+    mushroom_boy.facing_delta += delta;
+}
+
+// Adjust the agent's zoom level within bounds
+void agent_zoom(n_int zoom) {
+    n_int total_zoom = mushroom_boy.zooming + zoom;
+    if (total_zoom > -99 && total_zoom < 120) { // Keep zoom within limits
+        mushroom_boy.zooming = total_zoom;
+    }
+}
+
+// Get the agent's current zoom level
+n_int agent_zooming(void) {
+    return mushroom_boy.zooming;
+}
+
+// Move the agent forward or backward
+void agent_move(n_int distance) {
+    n_vect2 direction, local_location;
+    n_vect2* current_location = agent_location();
+    n_int translated_facing;
+
+    // Save the current location
+    vect2_copy(&local_location, current_location);
+
+    // Update the agent's facing direction
+    mushroom_boy.facing = (mushroom_boy.facing + mushroom_boy.facing_delta + 256) & 255;
+
+    // Calculate the direction vector based on the facing angle
+    translated_facing = (128 + 64 + 256 - agent_facing()) & 255;
+    vect2_direction(&direction, translated_facing, 1);
+
+    // Move the agent and update the location delta
+    vect2_d(current_location, &direction, distance, 26880 / 20);
+    vect2_subtract(&mushroom_boy.location_delta, current_location, &local_location);
+}
+
+// Reset the agent's state for the next cycle
+void agent_cycle(void) {
+    mushroom_boy.facing_delta = 0;
+    mushroom_boy.location_delta = (n_vect2){0, 0};
+}
+
+
+
+// Function implementations
+
+memory_list *matrix_draw_identifier(void) {
+    return draw_identifier_list;
+}
+
+memory_list *matrix_draw_block(void) {
+    return block_list;
+}
+
+void matrix_draw_identifier_clear(void) {
+    matrix_timer++;
+    if (matrix_timer == 6) {
+        draw_identifier_list->count = 0;
+        matrix_timer = 0;
+    }
+}
+
+void matrix_draw_add(n_vect2 *start, n_vect2 *end) {
+    matrix_plane draw_identifier;
+    draw_identifier.start = *start;
+    draw_identifier.end = *end;
+#ifdef DEBUG_BLOCKING_BOUNDARIES
+    draw_identifier.color = 2;
+    draw_identifier.thickness = 1;
+#endif
+    memory_list_copy(draw_identifier_list, (n_byte *)&draw_identifier, sizeof(draw_identifier));
+}
+
+void matrix_init(void) {
+    block_list = memory_list_new(sizeof(matrix_plane), 50000);
+    draw_identifier_list = memory_list_new(sizeof(matrix_plane), 60000);
+}
+
+void matrix_close(void) {
+    memory_list_free(&block_list);
+    memory_list_free(&draw_identifier_list);
+}
+
+void matrix_add_door(n_vect2 *start, n_vect2 *end) {
+    // TODO: Implement door addition logic
+}
+
+void matrix_add_fence(n_vect2 *start, n_vect2 *end) {
+    matrix_plane new_fence;
+    new_fence.start = *start;
+    new_fence.end = *end;
+#ifdef DEBUG_BLOCKING_BOUNDARIES
+    new_fence.color = 3;
+    new_fence.thickness = 1;
+#endif
+    memory_list_copy(block_list, (n_byte *)&new_fence, sizeof(new_fence));
+}
+
+void matrix_add_window(n_vect2 *start, n_vect2 *end) {
+    // TODO: Implement window addition logic
+}
+
+void matrix_add_wall(n_vect2 *start, n_vect2 *end) {
+    matrix_plane new_wall;
+    new_wall.start = *start;
+    new_wall.end = *end;
+#ifdef DEBUG_BLOCKING_BOUNDARIES
+    new_wall.color = 2;
+    new_wall.thickness = 1;
+#endif
+    memory_list_copy(block_list, (n_byte *)&new_wall, sizeof(new_wall));
+}
+
+n_byte matrix_visually_open(n_vect2 *origin, n_vect2 *end) {
+    n_int loop = 0;
+    matrix_plane *recorded_walls;
+
+    if (block_list == NULL) {
+        return 0;
+    }
+
+    recorded_walls = (matrix_plane *)block_list->data;
+    matrix_draw_add(origin, end);
+
+    while (loop < block_list->count) {
+        if (math_do_intersect(origin, end, &recorded_walls[loop].start, &recorded_walls[loop].end)) {
+            matrix_draw_add(&recorded_walls[loop].start, &recorded_walls[loop].end);
+            hit_block++;
+            return 0;
+        }
+        loop++;
+    }
+    return 1;
+}
+
+void matrix_account(void) {
+    hit_block = 0;
+    matrix_draw_identifier_clear();
+}
+
+
 // Function to convert direction integer to string
 static n_string game_object_direction(n_int direction) {
     switch (direction) {

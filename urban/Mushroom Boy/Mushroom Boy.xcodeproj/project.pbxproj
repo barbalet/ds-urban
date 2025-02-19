@@ -7,14 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4A0CBEE71F78B0B40038948D /* park.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A0CBEE61F78B0B40038948D /* park.c */; };
-		4A55A64320048CB9008EE3DF /* matrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A55A64220048CB8008EE3DF /* matrix.c */; };
 		4A723A102A74CD28000EB0A4 /* pnglite.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A723A0E2A74CD28000EB0A4 /* pnglite.c */; };
 		4A723A112A74CD28000EB0A4 /* pngload.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A723A0F2A74CD28000EB0A4 /* pngload.c */; };
 		4A8506132593BEC2000479C6 /* game_objects.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A8506122593BEC2000479C6 /* game_objects.c */; };
-		4A916BBD1F782C1A0080F27F /* twoblock.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A916BBC1F782C1A0080F27F /* twoblock.c */; };
 		4A916BC11F783E180080F27F /* neighborhood.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A916BC01F783E180080F27F /* neighborhood.c */; };
-		4ABA181E1F5E643B00DFD769 /* tree.c in Sources */ = {isa = PBXBuildFile; fileRef = 4ABA181D1F5E643B00DFD769 /* tree.c */; };
 		4AC319EC29BAA4DA0061D099 /* ASMacView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC319E229BAA4D90061D099 /* ASMacView.m */; };
 		4AC319ED29BAA4DA0061D099 /* ASShared.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC319E329BAA4D90061D099 /* ASShared.m */; };
 		4AC319EE29BAA4DA0061D099 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC319E429BAA4D90061D099 /* main.m */; };
@@ -39,9 +35,6 @@
 		5A37A3DA1955F32900D187B0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A37A3B91955F32800D187B0 /* Cocoa.framework */; };
 		5A37A3E21955F32900D187B0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5A37A3E01955F32900D187B0 /* InfoPlist.strings */; };
 		5A37A3E41955F32900D187B0 /* Mushroom_BoyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A37A3E31955F32900D187B0 /* Mushroom_BoyTests.m */; };
-		5A6AD3F71AE0D493008CB27B /* agent.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A6AD3F61AE0D493008CB27B /* agent.c */; };
-		7B0542261C3864C00079EF20 /* fence.c in Sources */ = {isa = PBXBuildFile; fileRef = 7B0542241C3864C00079EF20 /* fence.c */; };
-		7B0542271C3864C00079EF20 /* road.c in Sources */ = {isa = PBXBuildFile; fileRef = 7B0542251C3864C00079EF20 /* road.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,15 +48,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4A0CBEE61F78B0B40038948D /* park.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = park.c; sourceTree = "<group>"; };
-		4A55A64220048CB8008EE3DF /* matrix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = matrix.c; sourceTree = "<group>"; };
 		4A723A0D2A74CD28000EB0A4 /* pnglite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pnglite.h; path = ../../../apesdk/external/png/pnglite.h; sourceTree = "<group>"; };
 		4A723A0E2A74CD28000EB0A4 /* pnglite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pnglite.c; path = ../../../apesdk/external/png/pnglite.c; sourceTree = "<group>"; };
 		4A723A0F2A74CD28000EB0A4 /* pngload.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngload.c; path = ../../../apesdk/external/png/pngload.c; sourceTree = "<group>"; };
 		4A8506122593BEC2000479C6 /* game_objects.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = game_objects.c; sourceTree = "<group>"; };
-		4A916BBC1F782C1A0080F27F /* twoblock.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = twoblock.c; sourceTree = "<group>"; };
 		4A916BC01F783E180080F27F /* neighborhood.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = neighborhood.c; sourceTree = "<group>"; };
-		4ABA181D1F5E643B00DFD769 /* tree.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tree.c; sourceTree = "<group>"; };
 		4AC319E229BAA4D90061D099 /* ASMacView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASMacView.m; path = ../../../apesdk/mac/ASMacView.m; sourceTree = "<group>"; };
 		4AC319E329BAA4D90061D099 /* ASShared.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASShared.m; path = ../../../apesdk/mac/ASShared.m; sourceTree = "<group>"; };
 		4AC319E429BAA4D90061D099 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ../../../apesdk/mac/main.m; sourceTree = "<group>"; };
@@ -103,9 +92,6 @@
 		5A37A3DF1955F32900D187B0 /* Mushroom BoyTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Mushroom BoyTests-Info.plist"; sourceTree = "<group>"; };
 		5A37A3E11955F32900D187B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5A37A3E31955F32900D187B0 /* Mushroom_BoyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Mushroom_BoyTests.m; sourceTree = "<group>"; };
-		5A6AD3F61AE0D493008CB27B /* agent.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = agent.c; sourceTree = "<group>"; };
-		7B0542241C3864C00079EF20 /* fence.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fence.c; sourceTree = "<group>"; };
-		7B0542251C3864C00079EF20 /* road.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = road.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,14 +170,7 @@
 		5A0D60DE19567F8E00090DAE /* game */ = {
 			isa = PBXGroup;
 			children = (
-				4A55A64220048CB8008EE3DF /* matrix.c */,
-				7B0542241C3864C00079EF20 /* fence.c */,
-				4A916BBC1F782C1A0080F27F /* twoblock.c */,
 				4A916BC01F783E180080F27F /* neighborhood.c */,
-				4A0CBEE61F78B0B40038948D /* park.c */,
-				7B0542251C3864C00079EF20 /* road.c */,
-				5A6AD3F61AE0D493008CB27B /* agent.c */,
-				4ABA181D1F5E643B00DFD769 /* tree.c */,
 				5A0D60E119567F8E00090DAE /* house.c */,
 				4A8506122593BEC2000479C6 /* game_objects.c */,
 				5A0D60E219567F8E00090DAE /* mushroom.h */,
@@ -402,23 +381,16 @@
 				4AC319F929BAA4F60061D099 /* io.c in Sources */,
 				4AC319EC29BAA4DA0061D099 /* ASMacView.m in Sources */,
 				4AC31A0429BAA50E0061D099 /* graph.c in Sources */,
-				4A0CBEE71F78B0B40038948D /* park.c in Sources */,
 				4AC319FC29BAA4F60061D099 /* memory.c in Sources */,
-				5A6AD3F71AE0D493008CB27B /* agent.c in Sources */,
-				7B0542271C3864C00079EF20 /* road.c in Sources */,
 				4AC319FA29BAA4F60061D099 /* math.c in Sources */,
 				4AC319FB29BAA4F60061D099 /* file.c in Sources */,
 				4A723A112A74CD28000EB0A4 /* pngload.c in Sources */,
-				4A916BBD1F782C1A0080F27F /* twoblock.c in Sources */,
-				4ABA181E1F5E643B00DFD769 /* tree.c in Sources */,
-				4A55A64320048CB9008EE3DF /* matrix.c in Sources */,
 				4A8506132593BEC2000479C6 /* game_objects.c in Sources */,
 				4AC319F129BAA4DA0061D099 /* AppDelegate.m in Sources */,
 				4AFB715F2A74C67A0007863A /* shared.c in Sources */,
 				4AC319EE29BAA4DA0061D099 /* main.m in Sources */,
 				4AC319FD29BAA4F60061D099 /* object.c in Sources */,
 				4AC319F029BAA4DA0061D099 /* ASMacCG.m in Sources */,
-				7B0542261C3864C00079EF20 /* fence.c in Sources */,
 				4A916BC11F783E180080F27F /* neighborhood.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -106,6 +106,14 @@ void neighborhood_object(n_string file_location)
     unknown_free( (void **) &return_object, OBJECT_OBJECT );
 }
 
+void twoblock_init(n_byte2 * seed, n_vect2 * location, simulated_twoblock * twoblock) {
+    twoblock->rotation = math_random(seed) & 1;
+    house_init(seed, location, (simulated_building*)&(twoblock->house));
+    
+    path_init(location, (simulated_path_group*)&(twoblock->road), twoblock->rotation, 0);
+    fence_init(seed, twoblock->rotation, location, (simulated_fence*)&(twoblock->fence));
+}
+
 /// Initializes the neighborhood and seeds to values into the two block which is the next level of structure combination.
 /// - Parameter seed: two byte random seed.
 void neighborhood_init(n_byte2 * seed)
