@@ -13,11 +13,7 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="urban_mac" customModuleProvider="target">
-            <connections>
-                <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
-            </connections>
-        </customObject>
+        <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="urban_mac" customModuleProvider="target"/>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <menu title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
             <items>
@@ -681,21 +677,24 @@
             </items>
             <point key="canvasLocation" x="200" y="121"/>
         </menu>
-        <window title="urban-mac" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
-            <windowStyleMask key="styleMask" titled="YES"/>
+        <window title="Simulation" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="pe5-KX-hT1">
+            <windowStyleMask key="styleMask" titled="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="335" y="390" width="800" height="600"/>
+            <rect key="contentRect" x="61" y="127" width="800" height="600"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1470" height="918"/>
             <value key="minSize" type="size" width="800" height="600"/>
-            <value key="maxSize" type="size" width="800" height="600"/>
-            <view key="contentView" id="EiT-Mj-1SZ" customClass="DSMacView" customModule="urban_mac" customModuleProvider="target">
+            <value key="maxSize" type="size" width="8000" height="6000"/>
+            <view key="contentView" id="F4C-D0-EMa">
                 <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0d4-tE-hbm" customClass="DSMacView" customModule="urban_mac" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </customView>
+                </subviews>
             </view>
-            <connections>
-                <outlet property="delegate" destination="Voe-Tx-rLC" id="top-28-M4D"/>
-            </connections>
-            <point key="canvasLocation" x="200" y="400"/>
+            <point key="canvasLocation" x="139" y="-240"/>
         </window>
     </objects>
 </document>

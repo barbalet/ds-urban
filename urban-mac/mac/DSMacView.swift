@@ -148,7 +148,6 @@ class DSMacView: NSView {
         if #available(macOS 14, *) {
             dimY -= 28
         }
-        
         blitCode(dim_x: dimX, dim_y: dimY)
         
         DispatchQueue.main.async { [weak self] in
