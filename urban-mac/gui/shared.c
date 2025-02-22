@@ -1,286 +1,262 @@
 /****************************************************************
 
- shared.c
+    shared.c
 
- =============================================================
+    =============================================================
 
- Copyright 1996-2025 Tom Barbalet. All rights reserved.
+    Copyright 1996-2025 Tom Barbalet. All rights reserved.
 
- Permission is hereby granted, free of charge, to any person
- obtaining a copy of this software and associated documentation
- files (the "Software"), to deal in the Software without
- restriction, including without limitation the rights to use,
- copy, modify, merge, publish, distribute, sublicense, and/or
- sell copies of the Software, and to permit persons to whom the
- Software is furnished to do so, subject to the following
- conditions:
+    Permission is hereby granted, free of charge, to any person
+    obtaining a copy of this software and associated documentation
+    files (the "Software"), to deal in the Software without
+    restriction, including without limitation the rights to use,
+    copy, modify, merge, publish, distribute, sublicense, and/or
+    sell copies of the Software, and to permit persons to whom the
+    Software is furnished to do so, subject to the following
+    conditions:
 
- The above copyright notice and this permission notice shall be
- included in all copies or substantial portions of the Software.
+    The above copyright notice and this permission notice shall be
+    included in all copies or substantial portions of the Software.
 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+    OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+    HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+    WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+    OTHER DEALINGS IN THE SOFTWARE.
 
- This software is a continuing work of Tom Barbalet, begun on
- 13 June 1996. No apes or cats were harmed in the writing of
- this software.
+    This software is a continuing work of Tom Barbalet, begun on
+    13 June 1996. No apes or cats were harmed in the writing of
+    this software.
 
- ****************************************************************/
+****************************************************************/
 
 #include "../../apesdk/external/png/pnglite.h"
 #include "../../apesdk/shared.h"
 #include "../../apesdk/render/graph.h"
 #include "../game/mushroom.h"
-
 #include <stdio.h>
 
+// Global variables for key handling
 static n_byte  key_identification = 0;
 static n_byte2 key_value = 0;
 static n_byte  key_down = 0;
 
-static n_byte * outputBuffer = 0L;
-static n_byte * outputBufferOld = 0L;
-static n_int    outputBufferMax = -1;
+// Output buffer management
+static n_byte *outputBuffer = 0L;
+static n_byte *outputBufferOld = 0L;
+static n_int  outputBufferMax = -1;
 
+// External function declarations
 extern n_int draw_error(n_constant_string error_text, n_constant_string location, n_int line_number);
 
-void shared_color_8_bit_to_48_bit(n_byte2 * fit)
-{
+// Function to convert 8-bit color to 48-bit
+void shared_color_8_bit_to_48_bit(n_byte2 *fit) {
     draw_game_color(fit);
 }
 
-void shared_dimensions(n_int * dimensions)
-{
+// Function to set dimensions
+void shared_dimensions(n_int *dimensions) {
     dimensions[0] = 1;
     dimensions[1] = 800;
     dimensions[2] = 600;
     dimensions[3] = 0;
 }
 
-n_int draw_error(n_constant_string error_text, n_constant_string location, n_int line_number)
-{
+// Error handling function
+n_int draw_error(n_constant_string error_text, n_constant_string location, n_int line_number) {
     printf("ERROR: %s, %s line: %ld\n", error_text, location, line_number);
-	return -1;
+    return -1;
 }
 
-shared_cycle_state shared_cycle(n_uint ticks, n_int fIdentification)
-{
+// Main cycle function
+shared_cycle_state shared_cycle(n_uint ticks, n_int fIdentification) {
     return SHARED_CYCLE_OK;
 }
 
-n_int shared_init(n_int view, n_uint random)
-{
-    n_byte2   seed[4];
+// Initialization function
+n_int shared_init(n_int view, n_uint random) {
+    n_byte2 seed[4];
 
     draw_init();
-    
+
+    // Seed initialization
     seed[3] = (random >>  0) & 0xffff;
     seed[2] = (random >> 16) & 0xffff;
     seed[1] = (random >> 32) & 0xffff;
     seed[0] = (random >> 48) & 0xffff;
-    
+
     seed[0] ^= seed[2];
     seed[1] ^= seed[3];
 
-    math_random(seed);
-    math_random(seed);
-    math_random(seed);
-    math_random(seed);
-    math_random(seed);
-    
+    // Random number generation
+    for (int i = 0; i < 5; i++) {
+        math_random(seed);
+    }
+
     neighborhood_init(seed);
     agent_init();
-    
+
     return 0;
 }
 
-void shared_close(void)
-{
-    if (outputBufferOld)
-    {
-        memory_free((void**)&outputBufferOld);
+// Cleanup function
+void shared_close(void) {
+    if (outputBufferOld) {
+        memory_free((void **)&outputBufferOld);
     }
-    
-    if (outputBuffer)
-    {
-        memory_free((void**)&outputBuffer);
+    if (outputBuffer) {
+        memory_free((void **)&outputBuffer);
     }
-    
     draw_close();
 }
 
-n_int shared_menu(n_int menuValue)
-{
+// Menu handling function
+n_int shared_menu(n_int menuValue) {
     return 0;
 }
 
-void shared_rotate(n_double num, n_int wwind)
-{
+// Rotation handling function
+void shared_rotate(n_double num, n_int wwind) {
     n_int integer_rotation_256 = (n_int)((num * 256) / 360);
     agent_turn(integer_rotation_256);
 }
 
-
-void shared_delta(n_double delta_x, n_double delta_y, n_int wwind)
-{
-    if (delta_y > 0)
-    {
+// Delta (movement) handling function
+void shared_delta(n_double delta_x, n_double delta_y, n_int wwind) {
+    if (delta_y > 0) {
         agent_move(-1);
     }
-    if (delta_y < 0)
-    {
+    if (delta_y < 0) {
         agent_move(1);
     }
 }
 
-void shared_zoom(n_double num, n_int wwind)
-{
+// Zoom handling function
+void shared_zoom(n_double num, n_int wwind) {
     n_int integer_zoom = (n_int)(num * 100);
     agent_zoom(integer_zoom);
 }
 
-void shared_keyReceived(n_int value, n_int fIdentification)
-{
+// Key press handling function
+void shared_keyReceived(n_int value, n_int fIdentification) {
     key_down = 1;
     key_value = value;
     key_identification = fIdentification;
 }
 
-void shared_keyUp(void)
-{
+// Key release handling function
+void shared_keyUp(void) {
     key_down = 0;
 }
 
-void shared_mouseOption(n_byte option)
-{
-    
+// Mouse option handling function
+void shared_mouseOption(n_byte option) {
+    // Currently no implementation
 }
 
-void shared_mouseReceived(n_double valX, n_double valY, n_int localIdentification)
-{
+// Mouse input handling function
+void shared_mouseReceived(n_double valX, n_double valY, n_int localIdentification) {
+    // Currently no implementation
 }
 
-void shared_mouseUp(void)
-{
+// Mouse release handling function
+void shared_mouseUp(void) {
+    // Currently no implementation
 }
 
-void shared_about(void)
-{
-    
+// About function
+void shared_about(void) {
+    // Currently no implementation
 }
 
 #ifdef _WIN32
-
+// Legacy draw function for Windows
 static n_byte offscreen[800 * 600];
 
-n_byte * shared_legacy_draw(n_byte fIdentification, n_int dim_x, n_int dim_y)
-{
+n_byte *shared_legacy_draw(n_byte fIdentification, n_int dim_x, n_int dim_y) {
     shared_draw(0, 800, 600, 0);
     return offscreen;
 }
-
 #endif
 
-static n_byte * shared_output_buffer(n_int width, n_int height)
-{
-    if (outputBufferOld)
-    {
+// Output buffer management function
+static n_byte *shared_output_buffer(n_int width, n_int height) {
+    if (outputBufferOld) {
         memory_free((void **)&outputBufferOld);
     }
-    
-    if ((outputBuffer == 0L) || ((width * height * 4) > outputBufferMax))
-    {
+
+    if ((outputBuffer == 0L) || ((width * height * 4) > outputBufferMax)) {
         outputBufferMax = width * height * 4;
         outputBufferOld = outputBuffer;
         outputBuffer = memory_new(outputBufferMax);
-        (void)SHOW_ERROR("Moving towards no outputBuffer");
     }
-    if (outputBuffer == 0L)
-    {
+
+    if (outputBuffer == 0L) {
         (void)SHOW_ERROR("No output buffer");
     }
-    
-    return outputBuffer; // Outputbuffer is 0L
+
+    return outputBuffer;
 }
 
-n_byte * shared_convert_4_to_3(n_byte * copy_in,  n_uint size)
-{
-    n_byte *return_value = memory_new( size * 3 );
-    if (return_value == 0L)
-    {
+// Function to convert 4-byte to 3-byte format
+n_byte *shared_convert_4_to_3(n_byte *copy_in, n_uint size) {
+    n_byte *return_value = memory_new(size * 3);
+    if (return_value == 0L) {
         return 0L;
     }
-    n_uint loop = 0, loop3 = 0, loop4 = 0;
-    while (loop < size)
-    {
-        loop4++;
 
-        return_value[ loop3 ++] = copy_in[ loop4++];
-        return_value[ loop3 ++] = copy_in[ loop4++];
-        return_value[ loop3 ++] = copy_in[ loop4++];
+    n_uint loop = 0, loop3 = 0, loop4 = 0;
+    while (loop < size) {
+        loop4++;
+        return_value[loop3++] = copy_in[loop4++];
+        return_value[loop3++] = copy_in[loop4++];
+        return_value[loop3++] = copy_in[loop4++];
         loop++;
     }
     return return_value;
 }
 
-n_byte * shared_draw(n_int fIdentification, n_int dim_x, n_int dim_y, n_byte size_changed)
-{
-    n_byte * outputBuffer = shared_output_buffer(dim_x, dim_y);
+// Main draw function
+n_byte *shared_draw(n_int fIdentification, n_int dim_x, n_int dim_y, n_byte size_changed) {
+    n_byte *outputBuffer = shared_output_buffer(dim_x, dim_y);
     n_int print_screen = 0;
     n_int save_neighborhood = 0;
     n_int turn_delta = 0;
     n_int move_delta = 0;
     n_int zoomed_delta = 0;
-    if((key_down == 1) && (key_identification == fIdentification))
-    {
+
+    if ((key_down == 1) && (key_identification == fIdentification)) {
         n_int mod_key = key_value & 2047;
         n_int shift_key = key_value >> 11;
-        
-        if ((mod_key == 'p') || (mod_key == 'P'))
-        {
+
+        if ((mod_key == 'p') || (mod_key == 'P')) {
             printf("print screen\n");
             print_screen = 1;
         }
-        if ((mod_key == 's') || (mod_key == 'S'))
-        {
+        if ((mod_key == 's') || (mod_key == 'S')) {
             printf("save neighborhood\n");
             save_neighborhood = 1;
         }
-        
-        if ((mod_key > 27) && (mod_key < 32))
-        {
-            switch (mod_key)
-            {
-                case 28:
-                    turn_delta --;
-                    break;
-                case 29:
-                    turn_delta ++;
-                    break;
+
+        if ((mod_key > 27) && (mod_key < 32)) {
+            switch (mod_key) {
+                case 28: turn_delta--; break;
+                case 29: turn_delta++; break;
                 case 30:
-                    if (shift_key)
-                    {
+                    if (shift_key) {
                         zoomed_delta++;
-                    }
-                    else
-                    {
-                        move_delta ++;
+                    } else {
+                        move_delta++;
                     }
                     break;
                 default:
-                    if (shift_key)
-                    {
+                    if (shift_key) {
                         zoomed_delta--;
-                    }
-                    else
-                    {
-                        move_delta --;
+                    } else {
+                        move_delta--;
                     }
                     break;
             }
@@ -291,54 +267,50 @@ n_byte * shared_draw(n_int fIdentification, n_int dim_x, n_int dim_y, n_byte siz
     agent_zoom(zoomed_delta);
     agent_move(move_delta);
     agent_cycle();
-//    city_cycle();
-    if (draw_game_scene(dim_x, dim_y))
-    {
+
+    if (draw_game_scene(dim_x, dim_y)) {
         draw_render(outputBuffer, dim_x, dim_y);
     }
-    if (print_screen)
-    {
-        n_byte * threebytes = shared_convert_4_to_3(outputBuffer, (dim_x * dim_y));
+
+    if (print_screen) {
+        n_byte *threebytes = shared_convert_4_to_3(outputBuffer, (dim_x * dim_y));
         write_png_file("/Users/barbalet/mushroom_output.png", (int)dim_x, (int)dim_y, threebytes);
-        memory_free((void**)&threebytes);
+        memory_free((void **)&threebytes);
     }
-    
-    if (save_neighborhood)
-    {
+
+    if (save_neighborhood) {
         neighborhood_object("/Users/barbalet/mushroom_output.json");
     }
+
     return outputBuffer;
 }
 
-n_int shared_new(n_uint seed)
-{    
+// New game initialization function
+n_int shared_new(n_uint seed) {
     return 0;
 }
 
-n_int shared_new_agents(n_uint seed)
-{
+// New agents initialization function
+n_int shared_new_agents(n_uint seed) {
     return 0;
 }
 
-n_byte shared_openFileName(n_constant_string cStringFileName, n_int isScript)
-{
-//    (void) element_document_disk_read(cStringFileName);
+// File open handling function
+n_byte shared_openFileName(n_constant_string cStringFileName, n_int isScript) {
     return 0;
 }
 
-void shared_saveFileName(n_constant_string cStringFileName)
-{
-    
+// File save handling function
+void shared_saveFileName(n_constant_string cStringFileName) {
+    // Currently no implementation
 }
 
-void shared_script_debug_handle(n_constant_string cStringFileName)
-{
-    
+// Script debug handling function
+void shared_script_debug_handle(n_constant_string cStringFileName) {
+    // Currently no implementation
 }
 
-n_uint shared_max_fps(void)
-{
+// Maximum FPS function
+n_uint shared_max_fps(void) {
     return 60;
 }
-
-
