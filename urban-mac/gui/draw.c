@@ -436,7 +436,6 @@ n_int draw_game_scene(n_int dim_x, n_int dim_y)
 void draw_render(n_byte * buffer, n_int dim_x, n_int dim_y)
 {
     glrender_set_size(dim_x, dim_y);
-    printf("%ld, %ld", dim_x, dim_y);
     // like buffer == 0
     if (buffer)
     {

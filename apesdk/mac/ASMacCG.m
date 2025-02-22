@@ -33,75 +33,75 @@ ASMacCG.m
  
  ****************************************************************/
 
-#import "ASMacCG.h"
-
-#include <stdio.h>
-#include <stdlib.h>
-
-@interface ASMacCG()
-
-@end
-
-@implementation ASMacCG
-
-- (void) quitProcedure
-{
-    [self.shared close];
-    
-    exit(0);
-}
-
-- (void) drawRect:(NSRect)rect
-{
-    NSInteger      dim_x = (NSInteger)rect.size.width;
-    NSInteger      dim_y = (NSInteger)rect.size.height;
-
-    [self.shared cycle];
-    
-    if ([self.shared cycleQuit])
-    {
-        NSLog(@"Quit procedure initiated");
-        [self quitProcedure];
-    }
-    
-    if ([self.shared cycleNewApes])
-    {
-        NSLog(@"New apes neede to continue simulation");
-        [self.shared newAgents];
-    }
-    const float scaleFactor = 1;
-            
-    /* Sonoma fix */
-    if (@available(macOS 14, *)) {
-        dim_y = dim_y - 28;
-    }
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    
-    CGContextRef     drawRef = 
-    CGBitmapContextCreate(shared_draw([self.shared sharedId], dim_x, dim_y, 0), (size_t)(rect.size.width * scaleFactor), (size_t)(dim_y * scaleFactor), 8, (size_t)(rect.size.width * 4 * scaleFactor), colorSpace, (CGBitmapInfo) kCGBitmapByteOrder32Big|kCGImageAlphaNoneSkipFirst);
-        
-    CGColorSpaceRelease( colorSpace );
-    
-    CGContextRef context = [[NSGraphicsContext currentContext] CGContext];
-    CGContextSaveGState(context);
-    
-    CGContextSetBlendMode(context, kCGBlendModeCopy);
-    CGContextSetShouldAntialias(context, NO);
-    CGContextSetAllowsAntialiasing(context, NO);
-    
-    CGImageRef image = CGBitmapContextCreateImage(drawRef);
-    
-    NSRect newRect;
-    
-    newRect.origin.x = 0;
-    newRect.origin.y = 0;
-    newRect.size.width = dim_x;
-    newRect.size.height = dim_y;
-    
-    CGContextDrawImage(context, newRect, image);
-    CGContextRestoreGState(context);
-    CGImageRelease(image);
-    CGContextRelease(drawRef);
-}
-
-@end
+//#import "ASMacCG.h"
+//
+//#include <stdio.h>
+//#include <stdlib.h>
+//
+//@interface ASMacCG()
+//
+//@end
+//
+//@implementation ASMacCG
+//
+//- (void) quitProcedure
+//{
+//    [self.shared close];
+//    
+//    exit(0);
+//}
+//
+//- (void) drawRect:(NSRect)rect
+//{
+//    NSInteger      dim_x = (NSInteger)rect.size.width;
+//    NSInteger      dim_y = (NSInteger)rect.size.height;
+//
+//    [self.shared cycle];
+//    
+//    if ([self.shared cycleQuit])
+//    {
+//        NSLog(@"Quit procedure initiated");
+//        [self quitProcedure];
+//    }
+//    
+//    if ([self.shared cycleNewApes])
+//    {
+//        NSLog(@"New apes neede to continue simulation");
+//        [self.shared newAgents];
+//    }
+//    const float scaleFactor = 1;
+//            
+//    /* Sonoma fix */
+//    if (@available(macOS 14, *)) {
+//        dim_y = dim_y - 28;
+//    }
+//    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+//    
+//    CGContextRef     drawRef = 
+//    CGBitmapContextCreate(shared_draw([self.shared sharedId], dim_x, dim_y, 0), (size_t)(rect.size.width * scaleFactor), (size_t)(dim_y * scaleFactor), 8, (size_t)(rect.size.width * 4 * scaleFactor), colorSpace, (CGBitmapInfo) kCGBitmapByteOrder32Big|kCGImageAlphaNoneSkipFirst);
+//        
+//    CGColorSpaceRelease( colorSpace );
+//    
+//    CGContextRef context = [[NSGraphicsContext currentContext] CGContext];
+//    CGContextSaveGState(context);
+//    
+//    CGContextSetBlendMode(context, kCGBlendModeCopy);
+//    CGContextSetShouldAntialias(context, NO);
+//    CGContextSetAllowsAntialiasing(context, NO);
+//    
+//    CGImageRef image = CGBitmapContextCreateImage(drawRef);
+//    
+//    NSRect newRect;
+//    
+//    newRect.origin.x = 0;
+//    newRect.origin.y = 0;
+//    newRect.size.width = dim_x;
+//    newRect.size.height = dim_y;
+//    
+//    CGContextDrawImage(context, newRect, image);
+//    CGContextRestoreGState(context);
+//    CGImageRelease(image);
+//    CGContextRelease(drawRef);
+//}
+//
+//@end

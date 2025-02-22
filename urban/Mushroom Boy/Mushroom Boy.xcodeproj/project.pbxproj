@@ -15,7 +15,6 @@
 		4AC319ED29BAA4DA0061D099 /* ASShared.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC319E329BAA4D90061D099 /* ASShared.m */; };
 		4AC319EE29BAA4DA0061D099 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC319E429BAA4D90061D099 /* main.m */; };
 		4AC319EF29BAA4DA0061D099 /* urban.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AC319E729BAA4D90061D099 /* urban.xib */; };
-		4AC319F029BAA4DA0061D099 /* ASMacCG.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC319E929BAA4DA0061D099 /* ASMacCG.m */; };
 		4AC319F129BAA4DA0061D099 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC319EA29BAA4DA0061D099 /* AppDelegate.m */; };
 		4AC319F929BAA4F60061D099 /* io.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AC319F229BAA4F60061D099 /* io.c */; };
 		4AC319FA29BAA4F60061D099 /* math.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AC319F329BAA4F60061D099 /* math.c */; };
@@ -60,9 +59,7 @@
 		4AC319E629BAA4D90061D099 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../../../apesdk/mac/AppDelegate.h; sourceTree = "<group>"; };
 		4AC319E729BAA4D90061D099 /* urban.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = urban.xib; path = ../../../apesdk/mac/urban.xib; sourceTree = "<group>"; };
 		4AC319E829BAA4DA0061D099 /* ASShared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASShared.h; path = ../../../apesdk/mac/ASShared.h; sourceTree = "<group>"; };
-		4AC319E929BAA4DA0061D099 /* ASMacCG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASMacCG.m; path = ../../../apesdk/mac/ASMacCG.m; sourceTree = "<group>"; };
 		4AC319EA29BAA4DA0061D099 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ../../../apesdk/mac/AppDelegate.m; sourceTree = "<group>"; };
-		4AC319EB29BAA4DA0061D099 /* ASMacCG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASMacCG.h; path = ../../../apesdk/mac/ASMacCG.h; sourceTree = "<group>"; };
 		4AC319F229BAA4F60061D099 /* io.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = io.c; path = ../../../apesdk/toolkit/io.c; sourceTree = "<group>"; };
 		4AC319F329BAA4F60061D099 /* math.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = math.c; path = ../../../apesdk/toolkit/math.c; sourceTree = "<group>"; };
 		4AC319F429BAA4F60061D099 /* file.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = file.c; path = ../../../apesdk/toolkit/file.c; sourceTree = "<group>"; };
@@ -155,8 +152,6 @@
 			children = (
 				4AC319E629BAA4D90061D099 /* AppDelegate.h */,
 				4AC319EA29BAA4DA0061D099 /* AppDelegate.m */,
-				4AC319EB29BAA4DA0061D099 /* ASMacCG.h */,
-				4AC319E929BAA4DA0061D099 /* ASMacCG.m */,
 				4AC319E529BAA4D90061D099 /* ASMacView.h */,
 				4AC319E229BAA4D90061D099 /* ASMacView.m */,
 				4AC319E829BAA4DA0061D099 /* ASShared.h */,
@@ -390,7 +385,6 @@
 				4AFB715F2A74C67A0007863A /* shared.c in Sources */,
 				4AC319EE29BAA4DA0061D099 /* main.m in Sources */,
 				4AC319FD29BAA4F60061D099 /* object.c in Sources */,
-				4AC319F029BAA4DA0061D099 /* ASMacCG.m in Sources */,
 				4A916BC11F783E180080F27F /* neighborhood.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
