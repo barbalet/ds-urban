@@ -326,7 +326,7 @@ void glrender_fill(n_vect2 *quads) {
     memory_copy((n_byte *)quads, (n_byte *)new_quad.points, sizeof(n_vect2) * 4);
 
     if (current_case == GRAPHICS_CASE_DISPLAY) { /* Information is needed on this FIX */
-        memory_list_copy(display_quads, (n_byte *)&new_quad, /*sizeof(n_vect2) * 4*/72);
+        memory_list_copy(display_quads, (n_byte *)&new_quad, sizeof(glr_quad));
     }
 }
 
